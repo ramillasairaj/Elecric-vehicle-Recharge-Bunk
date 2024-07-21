@@ -1,0 +1,174 @@
+/* General resets and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 2;
+}
+
+/* Header and navigation styles */
+header {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding-bottom: 10px;
+}
+
+.top-bar {
+    background-color: #444;
+    color: #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.top-bar .contact-info span,
+.top-bar .contact-number span {
+    margin-right: 15px;
+}
+
+.social-icons img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav .logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+nav .cta-buttons .btn-get-quote {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+nav .cta-buttons .btn-get-quote:hover {
+    background-color: #218838;
+}
+
+/* Hero section styles */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #fff;
+}
+
+.hero-content {
+    max-width: 50%;
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 span {
+    color: #28a745;
+}
+
+.hero-content p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+/* Services section styles */
+.services {
+    padding: 50px 20px;
+    background-color: #f4f4f4;
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.services ul {
+    list-style: none;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.services ul li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer section styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 50px 20px;
+}
+
+footer .contact-us {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+footer .contact-us h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+footer .contact-us p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+footer .contact-us ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer .contact-us ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}

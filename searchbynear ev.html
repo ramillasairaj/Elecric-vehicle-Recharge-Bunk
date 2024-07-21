@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="searchnearby ev.css">
+    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Nearby Electric Vehicle Bunks</title>
+</head>
+<body>
+    <nav>		
+        <a href="searchbynear ev.html">search near by ev</a>
+        <a href="bunk location.html">bunk details</a>
+        <a href="slotvacancy.html" class="active">Slot Vacancy</a>
+        <a href="index.html" id="logout">LOGOUT</a>
+    </nav>
+    <div class="search-nearby">
+        <h1>Search Nearby Electric Vehicle Bunks</h1>
+        <input type="text" id="searchInput" placeholder="Enter location or area">
+        <button onclick="searchBunks()">Search</button>
+        <div class="form">
+            <table>
+                <thead>
+                  <tr>
+                    <th>Location</th>
+                    <th>Area</th>
+                    <th>No of Slots</th>
+                    <th>Mobile</th>
+                    <th>Slots Capacity</th>
+                    <th>Min Charge Time</th>
+                  </tr>
+                </thead>
+                <tbody id="bunk-table-body">
+                  <!-- Search results will be appended here -->
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <script>
+        const bunkData = [
+            { location: "Delhi", area: "Area 1", noOfSlots: 10, mobile: "1234567890", slotsCapacity: 50, minChargeTime: "30 mins" },
+            { location: "   Hyderabad", area: "Area 2", noOfSlots: 8, mobile: "0987654321", slotsCapacity: 40, minChargeTime: "25 mins" },
+            { location: "Bangalore ", area: "Area 3", noOfSlots: 12, mobile: "1122334455", slotsCapacity: 60, minChargeTime: "35 mins" }
+        ];
+
+        function searchBunks() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const tableBody = document.getElementById('bunk-table-body');
+            tableBody.innerHTML = ''; // Clear previous results
+
+            const filteredBunks = bunkData.filter(bunk => 
+                bunk.location.toLowerCase().includes(searchInput) || 
+                bunk.area.toLowerCase().includes(searchInput)
+            );
+
+            filteredBunks.forEach(bunk => {
+                const row = document.createElement('tr');
+
+                Object.values(bunk).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

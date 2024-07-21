@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Admin - Manage Recharge Slots</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+        }
+        nav a.active {
+            background-color: #575757;
+        }
+        nav a#logout {
+            float: right;
+        }
+        .container {
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 2px;
+            cursor: pointer;
+        }
+        button.delete {
+            background-color: #f44336;
+        }
+        button.edit {
+            background-color: #008CBA;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="evdetails.html">Create Details</a>
+        <a href="managebunk.html">Manage Bunk</a>
+        <a href="managerecharge slots.html" class="active">Manage Recharge Slots</a>
+        <a href="index.html" id="logout">LOGOUT</a>
+    </nav>
+
+    <div class="container">
+        <h2>Manage Recharge Slots</h2>
+        <table id="slotTable">
+            <thead>
+                <tr>
+                    <th>Slot ID</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Area</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example recharge slots will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const slotData = [
+                { slotID: 1, startTime: "08:00 AM", endTime: "10:00 AM", status: "Available", location: "Delhi", area: "near indiagate" },
+                { slotID: 2, startTime: "10:00 AM", endTime: "12:00 PM", status: "Occupied", location: "Bangalore", area: "whitefield" },
+                { slotID: 3, startTime: "12:00 PM", endTime: "02:00 PM", status: "Available", location: "Hyderabad", area: "narakramguda" }
+            ];
+
+            function renderTable() {
+                const tableBody = document.querySelector('#slotTable tbody');
+                tableBody.innerHTML = ''; // Clear previous contents
+
+                slotData.forEach((slot, index) => {
+                    const row = document.createElement('tr');
+
+                    Object.keys(slot).forEach(key => {
+                        const cell = document.createElement('td');
+                        cell.textContent = slot[key];
+                        cell.onclick = () => editCell(cell, index, key);
+                        row.appendChild(cell);
+                    });
+
+                    const actionsCell = document.createElement('td');
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.className = 'delete';
+                    deleteButton.onclick = () => deleteRow(index);
+
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'Edit';
+                    editButton.className = 'edit';
+                    editButton.onclick = () => editRow(index);
+
+                    actionsCell.appendChild(editButton);
+                    actionsCell.appendChild(deleteButton);
+                    row.appendChild(actionsCell);
+
+                    tableBody.appendChild(row);
+                });
+            }
+
+            function editCell(cell, index, key) {
+                const oldValue = cell.textContent;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = oldValue;
+                cell.textContent = '';
+                cell.appendChild(input);
+
+                input.focus();
+
+                input.addEventListener('blur', () => {
+                    const newValue = input.value;
+                    cell.textContent = newValue;
+                    slotData[index][key] = newValue;
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        input.blur();
+                    } else if (e.key === 'Escape') {
+                        input.value = oldValue;
+                        input.blur();
+                    }
+                });
+            }
+
+            function editRow(index) {
+                const slot = slotData[index];
+                const newSlotID = prompt("Enter new Slot ID:", slot.slotID);
+                const newStartTime = prompt("Enter new Start Time:", slot.startTime);
+                const newEndTime = prompt("Enter new End Time:", slot.endTime);
+                const newStatus = prompt("Enter new Status:", slot.status);
+                const newLocation = prompt("Enter new Location:", slot.location);
+                const newArea = prompt("Enter new Area:", slot.area);
+
+                slotData[index] = {
+                    slotID: newSlotID,
+                    startTime: newStartTime,
+                    endTime: newEndTime,
+                    status: newStatus,
+                    location: newLocation,
+                    area: newArea
+                };
+
+                renderTable();
+            }
+
+            function deleteRow(index) {
+                slotData.splice(index, 1);
+                renderTable();
+            }
+
+            renderTable();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Vacancy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+        }
+        nav a.active {
+            background-color: #575757;
+        }
+        nav a#logout {
+            float: right;
+        }
+        .container {
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="evdetails.html">Create Details</a>
+        <a href="managebunk.html">Manage Bunk</a>
+        <a href="rechargeslots.html">Manage Recharge Slots</a>
+        <a href="slotvacancy.html" class="active">Slot Vacancy</a>
+        <a href="index.html" id="logout">LOGOUT</a>
+    </nav>
+    <div class="container">
+        <h2>Slot Vacancy</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Slot ID</th>
+                    <th>Status</th>
+                    <th>Time Slot</th>
+                    <th>Map</th>
+                </tr>
+            </thead>
+            <tbody id="slot-table-body">
+                <!-- Slot details will be populated here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const exampleSlots = [
+                {
+                    location: 'Delhi',
+                    slotId: 'S001',
+                    status: 'Available',
+                    timeSlot: '10:00 AM - 11:00 AM',
+                    mapLink: 'https://www.google.com/maps?q=28.7041,77.1025'  // Coordinates for Delhi
+                },
+                {
+                    location: 'Bangalore',
+                    slotId: 'S002',
+                    status: 'Occupied',
+                    timeSlot: '11:00 AM - 12:00 PM',
+                    mapLink: 'https://www.google.com/maps?q=12.9716,77.5946'  // Coordinates for Bangalore
+                },
+                {
+                    location: 'Hyderabad',
+                    slotId: 'S003',
+                    status: 'Available',
+                    timeSlot: '12:00 PM - 01:00 PM',
+                    mapLink: 'https://www.google.com/maps?q=17.3850,78.4867'  // Coordinates for Hyderabad
+                }
+            ];
+
+            const tableBody = document.getElementById('slot-table-body');
+            exampleSlots.forEach(slot => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${slot.location}</td>
+                    <td>${slot.slotId}</td>
+                    <td>${slot.status}</td>
+                    <td>${slot.timeSlot}</td>
+                    <td><a href="${slot.mapLink}" target="_blank">View Map</a></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="manage_bunk_details.css">
+    <link rel="stylesheet" href="managebunk.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bunk Details</title>
+</head>
+<body>
+    <nav>		
+        <a href="evdetails.html" class="active">Create Details</a>
+        <a href="managebunk.html">Manage Bunk</a>
+        <a href="managerecharge slots.html">Manage Recharge Slots</a>
+        <a href="index.html" id="logout">LOGOUT</a>
+    </nav>
+    <div class="manage-bunk">
+        <div class="form">
+            <table>
+                <thead>
+                  <tr>
+                    <th>Location</th>
+                    <th>Area</th>
+                    <th>No of Slots</th>
+                    <th>Mobile</th>
+                    <th>Slots Capacity</th>
+                    <th>Min Charge Time</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="bunk-table-body">
+                  <!-- Table rows will be populated by JavaScript -->
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const bunkData = [
+                { location: "Delhi", area: "near India gate", noOfSlots: 10, mobile: "1234567890", slotsCapacity: 50, minChargeTime: "30 mins" },
+                { location: "Bangalore", area: "near whitefield", noOfSlots: 8, mobile: "0987654321", slotsCapacity: 40, minChargeTime: "25 mins" },
+                { location: "Hyderabad", area: "near nakramguda main road", noOfSlots: 12, mobile: "1122334455", slotsCapacity: 60, minChargeTime: "35 mins" }
+            ];
+
+            function renderTable() {
+                const tableBody = document.getElementById('bunk-table-body');
+                tableBody.innerHTML = ''; // Clear previous contents
+
+                bunkData.forEach((bunk, index) => {
+                    const row = document.createElement('tr');
+
+                    Object.keys(bunk).forEach(key => {
+                        const cell = document.createElement('td');
+                        cell.textContent = bunk[key];
+                        cell.onclick = () => editCell(cell, index, key);
+                        row.appendChild(cell);
+                    });
+
+                    const actionsCell = document.createElement('td');
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.onclick = () => deleteBunk(index);
+
+                    actionsCell.appendChild(deleteButton);
+                    row.appendChild(actionsCell);
+
+                    tableBody.appendChild(row);
+                });
+            }
+
+            function editCell(cell, index, key) {
+                const oldValue = cell.textContent;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = oldValue;
+                cell.textContent = '';
+                cell.appendChild(input);
+
+                input.focus();
+
+                input.addEventListener('blur', () => {
+                    const newValue = input.value;
+                    cell.textContent = newValue;
+                    bunkData[index][key] = newValue;
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        input.blur();
+                    } else if (e.key === 'Escape') {
+                        input.value = oldValue;
+                        input.blur();
+                    }
+                });
+            }
+
+            function deleteBunk(index) {
+                bunkData.splice(index, 1);
+                renderTable();
+            }
+
+            // Initial render
+            renderTable();
+        });
+    </script>
+</body>
+</html>
